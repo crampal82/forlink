@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diesel Density Converter</title>
+    <style>
+      #first{
+        text-align: center;
+        border: 5px solid yellow;
+        margin-left: 20%;
+        margin-right: 20%;
+        margin-bottom: 15px;
+
+      }
+      .sec{
+     
+        font-weight: bold;
+        font-size: medium;
+        text-align: center;
+      }
+      .third{
+        border: 5px solid yellow;
+        margin-left: 20%;
+        margin-right: 20%
+      }
+      #four{
+        text-align: center;
+        border: 5px solid yellow;
+        margin-left: 20%;
+        margin-right: 20%;
+        margin-bottom: 15px;
+
+      }
+    </style>
+</head>
+<body>
+   <div id="first"> <h1>Diesel Density Converter</h1></div>
+    
+   <div class="third">
+  <div class="sec">
+    <ul style="list-style-type: none;">
+    <li>
+    <label for="density">Enter Density (kg/m³):</label>
+    <input type="number" id="density" placeholder="Density value" />
+  </li>
+</ul>
+  </div>
+    
+  <div class="sec">
+    <ul style="list-style-type: none;">
+    <li>
+    <label for="temp">Enter Temperature (°C):</label>
+    <input type="number" id="temp" placeholder="Temperature value" />
+  </li>
+</ul>
+  </div>
+    
+<div class="sec">
+  <button onclick="convertToStandardDensity()" >Convert to Standard Density (15°C)</button>
+
+</div>    
+
+<div  class="sec">
+  <h2>Standard Density at 15°C: <span id="result"></span></h2>
+
+</div>
+</div>
+<div>
+  <h1 id="four">AVTEC</h1>
+</div>
+    <script>
+        function convertToStandardDensity() {
+            const density = parseFloat(document.getElementById('density').value);
+            const temp = parseFloat(document.getElementById('temp').value);
+            let result;
+
+            // Check for valid input
+            if (isNaN(density) || isNaN(temp)) {
+                document.getElementById('result').innerText = 'Please enter valid numbers.';
+                return;
+            }
+
+            // Approximate density change per degree Celsius
+            const densityChangePerDegree = 0.0007; // kg/m³ per °C (this is a rough estimate)
+
+            // Calculate the density at the standard temperature (15°C)
+            const standardTemp = 60; // Standard temperature in °C
+            const tempDifference = standardTemp - temp;
+            result = density + (tempDifference * densityChangePerDegree * density);
+
+            document.getElementById('result').innerText = result.toFixed(4) + ' kg/m³';
+        }
+    </script>
+</body>
+</html>
